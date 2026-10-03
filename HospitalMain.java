@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class HospitalMain {
 	public static void main(String[] args) {
 
-		System.out.println("WELCOME TO HOSPITAL MANAGEMENT SYSTEM");
+		System.out.println("WELCOME TO HOSPITAL MANAGEMENT SYSTEM!");
 		Hospital h = new Hospital();
 		Scanner sc = new Scanner(System.in);
 
