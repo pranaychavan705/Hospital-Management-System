@@ -7,6 +7,10 @@ public class Medicine {
 	private int quantity;
 	private double tprice;
 
+	public Medicine() {
+
+	}
+
 	public Medicine(int medicineId, String name, double price, int quantity) {
 		this.medicineId = medicineId;
 		this.name = name;

@@ -8,6 +8,10 @@ public class Bill {
 	private double roomFee;
 	private double totalBill;
 
+	public Bill() {
+
+	}
+
 	public Bill(int billId, int patientId, double consultationFee, double medicineFee, double roomFee) {
 		this.billId = billId;
 		this.patientId = patientId;

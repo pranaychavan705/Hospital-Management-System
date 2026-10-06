@@ -27,16 +27,57 @@ public class HospitalMain {
 				case 1:
 					System.out.println("Enter patient id");
 					int i = sc.nextInt();
+					while (h.patientExists(i)) {
+						System.out.println("Patient already exists enter another id");
+						i = sc.nextInt();
+					}
 					sc.nextLine();
 					System.out.println("Enter Patient name ");
 					String s = sc.nextLine();
+					while (s.trim().isEmpty()) {
+						System.out.println("Enter correct name");
+						s = sc.nextLine();
+					}
 					System.out.println("Enter age");
 					int a = sc.nextInt();
+					while (a <= 0) {
+						System.out.println("Enter valid age");
+						a = sc.nextInt();
+					}
 					sc.nextLine();
-					System.out.println("Enter gender");
-					String g = sc.nextLine();
+					System.out.println("Enter gender 1>Male 2>Female 3>Other ");
+					String g = "";
+
+					int cg = sc.nextInt();
+					while (cg < 1 || cg > 3) {
+
+						System.out.println("Enter valid choice");
+						cg = sc.nextInt();
+
+					}
+
+					switch (cg) {
+					case 1: {
+						g = "Male";
+						break;
+					}
+					case 2: {
+						g = "Female";
+						break;
+					}
+					case 3: {
+						g = "Other";
+						break;
+					}
+
+					}
+
 					System.out.println("Enter disease");
-					String d = sc.nextLine();
+					String d = sc.next();
+					while (d.trim().isEmpty()) {
+						System.out.println("Enter correct disease");
+						d = sc.nextLine();
+					}
 					h.addPatient(new Patient(i, s, a, g, d));
 					break;
 
@@ -64,10 +105,22 @@ public class HospitalMain {
 					sc.nextLine();
 					System.out.println("Enter Doctor name ");
 					String s = sc.nextLine();
+					while (s.trim().isEmpty()) {
+						System.out.println("Enter correct doctor name");
+						s = sc.nextLine();
+					}
 					System.out.println("Enter specialization ");
 					String specil = sc.nextLine();
+					while (specil.trim().isEmpty()) {
+						System.out.println("Enter correct specialization");
+						specil = sc.nextLine();
+					}
 					System.out.println("Enter experience");
-					int e = sc.nextInt();
+					float e = sc.nextFloat();
+					while (e < 0) {
+						System.out.println("Enter correct experience");
+						e = sc.nextInt();
+					}
 					h.addDoctor(new Doctor(i, s, specil, e));
 					break;
 				}
@@ -97,14 +150,52 @@ public class HospitalMain {
 					int id = sc.nextInt();
 					System.out.println("Enter patient id ");
 					int pId = sc.nextInt();
+					while (!h.patientExists(pId)) {
+						System.out.println("Enter valid patient id");
+						pId = sc.nextInt();
+					}
 					System.out.println("Enter doctor id ");
 					int dId = sc.nextInt();
+					while (!h.doctorExists(dId)) {
+						System.out.println("Enter valid doctor id");
+						dId = sc.nextInt();
+					}
 					sc.nextLine();
 					System.out.println("Enter day ");
 					String day = sc.nextLine();
+					System.out.println("Enter year");
+					int year = sc.nextInt();
+					while (year < 2000) {
+						System.out.println("Enter valid year");
+						year = sc.nextInt();
+					}
+					System.out.println("Enter month");
+					int month = sc.nextInt();
+
+					while (month < 1 || month > 12) {
+						System.out.println("Enter valid month");
+						month = sc.nextInt();
+					}
+					int maxDays;
+
+					if (month == 2) {
+						if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) {
+							maxDays = 29;
+						} else {
+							maxDays = 28;
+						}
+					} else if (month == 4 || month == 6 || month == 9 || month == 11) {
+						maxDays = 30;
+					} else {
+						maxDays = 31;
+					}
 					System.out.println("Enter date ");
 					int date = sc.nextInt();
-					h.addAppointment(new Appointment(id, pId, dId, day, date));
+					while (date < 1 || date > maxDays) {
+						System.out.println("Enter valid date");
+						date = sc.nextInt();
+					}
+					h.addAppointment(new Appointment(id, pId, dId, day, date, month, year));
 					break;
 
 				case 2:
@@ -127,14 +218,34 @@ public class HospitalMain {
 				case 1:
 					System.out.println("Enter Bill id");
 					int id = sc.nextInt();
+					while (h.billExists(id)) {
+						System.out.println("Bill ID already exists");
+						id = sc.nextInt();
+					}
 					System.out.println("Enter patient id");
 					int pid = sc.nextInt();
+					while (!h.patientExists(pid)) {
+						System.out.println("Enter correct patient id");
+						pid = sc.nextInt();
+					}
 					System.out.println("Enter consultation fee");
 					double cFee = sc.nextDouble();
+					while (cFee < 0) {
+						System.out.println("Enter correct amount");
+						cFee = sc.nextDouble();
+					}
 					System.out.println("Enter medicine fee");
 					double mFee = sc.nextDouble();
+					while (mFee < 0) {
+						System.out.println("Enter correct amount");
+						mFee = sc.nextDouble();
+					}
 					System.out.println("Enter room fee");
 					double rFee = sc.nextDouble();
+					while (rFee < 0) {
+						System.out.println("Enter correct amount");
+						rFee = sc.nextDouble();
+					}
 					Bill b = new Bill(id, pid, cFee, mFee, rFee);
 					b.totalBill();
 					h.addBills(b);
@@ -162,13 +273,29 @@ public class HospitalMain {
 				case 1:
 					System.out.println("Enter medicine id ");
 					int mid = sc.nextInt();
+					while (h.medicineExists(mid)) {
+						System.out.println("Enter correct id");
+						mid = sc.nextInt();
+					}
 					sc.nextLine();
 					System.out.println("Enter name of medicine");
 					String mName = sc.nextLine();
+					while (mName.trim().isEmpty()) {
+						System.out.println("Enter correct name");
+						mName = sc.nextLine();
+					}
 					System.out.println("Enter price ");
 					double p = sc.nextDouble();
+					while (p <= 0) {
+						System.out.println("Enter correct price");
+						p = sc.nextDouble();
+					}
 					System.out.println("Enter quantity");
 					int q = sc.nextInt();
+					while (q <= 0) {
+						System.out.println("Enter correct quantity");
+						q = sc.nextInt();
+					}
 					Medicine m = new Medicine(mid, mName, p, q);
 					h.addMedicines(m);
 					m.tprice();
@@ -194,13 +321,53 @@ public class HospitalMain {
 				case 1:
 					System.out.println("Enter room no");
 					int rno = sc.nextInt();
+					while (h.roomExists(rno)) {
+						System.out.println("Enter valid room no");
+						rno = sc.nextInt();
+					}
+					while (rno <= 0) {
+						System.out.println("Enter valid room no");
+						rno = sc.nextInt();
+					}
 					sc.nextLine();
-					System.out.println("Enter room type");
-					String rType = sc.nextLine();
+					System.out.println("Enter room type 1) General 2). Semi-Private 3) Private");
+					int rRoom = sc.nextInt();
+					while (rRoom < 1 || rRoom > 3) {
+						System.out.println("Enter correct choice");
+						rRoom = sc.nextInt();
+					}
+					String rType = "";
+					switch (rRoom) {
+					case 1:
+						rType = "General";
+						break;
+					case 2:
+						rType = "Semi-Private";
+						break;
+					case 3:
+						rType = "Private";
+					}
+
 					System.out.println("Price per day");
 					double d = sc.nextDouble();
-					System.out.println("Is occupied ??");
-					boolean isOccupied = sc.nextBoolean();
+					while (d <= 0) {
+						System.out.println("Enter correct price");
+						d = sc.nextDouble();
+					}
+					System.out.println("Room status 1) Available 2) Occupied");
+
+					int status = sc.nextInt();
+
+					while (status < 1 || status > 2) {
+						System.out.println("Enter correct choice");
+						status = sc.nextInt();
+					}
+
+					boolean isOccupied = false;
+
+					if (status == 2) {
+						isOccupied = true;
+					}
 					Room r = new Room(rno, rType, d, isOccupied);
 					h.addRooms(r);
 					r.totalPrice(4);

@@ -7,6 +7,10 @@ public class Room {
 	private boolean isOccupied;
 	private double totalPrice;
 
+	public Room() {
+
+	}
+
 	public Room(int roomNo, String roomType, double pricePerDay, boolean isOccupied) {
 		this.roomNo = roomNo;
 		this.roomType = roomType;

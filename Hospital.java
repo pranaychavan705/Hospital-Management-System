@@ -25,45 +25,80 @@ public class Hospital {
 
 	public void addPatient(Patient patient) {
 
-		for (int i = 0; i < patients.length; i++) {
-			if (patients[i] == null) {
-				patients[i] = patient;
-				System.out.println("Entry done");
-				break;
+		if (patientExists((patient.getPatientId()))) {
+			System.out.println("Patient already exist");
+		} else {
+			boolean pAdded = false;
+			for (int i = 0; i < patients.length; i++) {
+
+				if (patients[i] == null) {
+					patients[i] = patient;
+					System.out.println("Entry done");
+					pAdded = true;
+					break;
+				}
+
+			}
+			if (!pAdded) {
+				System.out.println("Patients are full");
 			}
 		}
+
 	}
 
 	public void displayPatients() {
 		for (Patient p : patients) {
 			if (p != null)
 				p.display();
+
 		}
 
+	}
+
+	public boolean patientExists(int id) {
+		for (Patient p : patients) {
+			if (p != null && p.getPatientId() == id) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void searchPatient(int id) {
 		boolean found = false;
 		for (Patient p : patients) {
 			if (p != null && p.getPatientId() == id) {
-				found = true;
 				p.display();
+				found = true;
 				break;
 			}
 		}
 		if (!found) {
 			System.out.println("Patient not found");
 		}
+
 	}
 
 	public void addDoctor(Doctor doctor) {
-		for (int i = 0; i < doctors.length; i++) {
-			if (doctors[i] == null) {
-				doctors[i] = doctor;
-				System.out.println("Entry done");
-				break;
+		if (doctorExists((doctor.getDoctorId()))) {
+
+			System.out.println("Doctor already exist");
+		} else {
+			boolean dAdded = false;
+			for (int i = 0; i < doctors.length; i++) {
+				if (doctors[i] == null) {
+					doctors[i] = doctor;
+					System.out.println("Entry done");
+					dAdded = true;
+					break;
+				}
+
+			}
+			if (!dAdded) {
+				System.out.println("Doctors are full");
 			}
 		}
+
 	}
 
 	public void displayDoctors() {
@@ -71,6 +106,15 @@ public class Hospital {
 			if (d != null)
 				d.display();
 		}
+	}
+
+	public boolean doctorExists(int id) {
+		for (Doctor d : doctors) {
+			if (d != null && d.getDoctorId() == id) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void searchDoctor(int id) {
@@ -88,11 +132,21 @@ public class Hospital {
 	}
 
 	public void addBills(Bill bill) {
-		for (int i = 0; i < bills.length; i++) {
-			if (bills[i] == null) {
-				bills[i] = bill;
-				System.out.println("Entry done");
-				break;
+		if (billExists((bill.getBillId()))) {
+
+			System.out.println("Bill already exist");
+		} else {
+			boolean bAdded = false;
+			for (int i = 0; i < bills.length; i++) {
+				if (bills[i] == null) {
+					bills[i] = bill;
+					System.out.println("Entry done");
+					bAdded = true;
+					break;
+				}
+			}
+			if (!bAdded) {
+				System.out.println("Bills are full");
 			}
 		}
 	}
@@ -102,6 +156,15 @@ public class Hospital {
 			if (b != null)
 				b.display();
 		}
+	}
+
+	public boolean billExists(int id) {
+		for (Bill b : bills) {
+			if (b != null && b.getBillId() == id) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void searchBill(int id) {
@@ -117,8 +180,6 @@ public class Hospital {
 			System.out.println("Bills not found");
 		}
 	}
-	
-	
 
 	public void addMedicines(Medicine medicine) {
 		for (int i = 0; i < medicines.length; i++) {
@@ -137,6 +198,18 @@ public class Hospital {
 		}
 	}
 
+	public boolean medicineExists(int id) {
+
+		for (Medicine m : medicines) {
+
+			if (m != null && m.getMedicineId() == id) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public void searchMedicine(int id) {
 		boolean found = false;
 		for (Medicine m : medicines) {
@@ -152,6 +225,7 @@ public class Hospital {
 	}
 
 	public void addRooms(Room room) {
+
 		for (int i = 0; i < rooms.length; i++) {
 			if (rooms[i] == null) {
 				rooms[i] = room;
@@ -166,6 +240,16 @@ public class Hospital {
 			if (r != null)
 				r.display();
 		}
+	}
+
+	public boolean roomExists(int rno) {
+
+		for (Room r : rooms) {
+			if (r != null && r.getRoomNo() == rno) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void searchRoom(int id) {
@@ -183,11 +267,21 @@ public class Hospital {
 	}
 
 	public void addAppointment(Appointment appointment) {
-		for (int i = 0; i < appointments.length; i++) {
-			if (appointments[i] == null) {
-				appointments[i] = appointment;
-				System.out.println("Entry done");
-				break;
+		if (appointmentExists((appointment.getAppointmentId()))) {
+			System.out.println("Appointment already exist");
+		} else {
+			boolean aAdded = false;
+			for (int i = 0; i < appointments.length; i++) {
+				if (appointments[i] == null) {
+					appointments[i] = appointment;
+					System.out.println("Entry done");
+					aAdded = true;
+					break;
+				}
+			}
+
+			if (!aAdded) {
+				System.out.println("Patients are full");
 			}
 		}
 	}
@@ -197,6 +291,15 @@ public class Hospital {
 			if (a != null)
 				a.display();
 		}
+	}
+
+	public boolean appointmentExists(int id) {
+		for (Appointment a : appointments) {
+			if (a != null && a.getAppointmentId() == id) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void searchAppointments(int id) {

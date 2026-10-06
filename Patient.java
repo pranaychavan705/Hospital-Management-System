@@ -7,6 +7,10 @@ public class Patient {
 	private String gender;
 	private String disease;
 
+	public Patient() {
+		
+	}
+
 	public Patient(int patientId, String patientName, int age, String gender, String disease) {
 		this.patientId = patientId;
 		this.patientName = patientName;

@@ -6,6 +6,10 @@ public class Doctor {
 	private String specialization;
 	private float experience;
 
+	public Doctor() {
+		
+	}
+
 	public Doctor(int doctorId, String name, String specialization, float experience) {
 		this.doctorId = doctorId;
 		this.name = name;

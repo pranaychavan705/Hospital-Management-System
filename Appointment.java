@@ -7,13 +7,21 @@ public class Appointment {
 	private int doctorId;
 	private String day;
 	private int date;
+	private int month;
+	private int year;
 
-	public Appointment(int appointmentId, int patientId, int doctorId, String day, int date) {
+	public Appointment() {
+	}
+
+	public Appointment(int appointmentId, int patientId, int doctorId, String day, int date, int month, int year) {
+		super();
 		this.appointmentId = appointmentId;
 		this.patientId = patientId;
 		this.doctorId = doctorId;
 		this.day = day;
 		this.date = date;
+		this.month = month;
+		this.year = year;
 	}
 
 	public int getAppointmentId() {
@@ -54,6 +62,22 @@ public class Appointment {
 
 	public void setDate(int date) {
 		this.date = date;
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public void setMonth(int month) {
+		this.month = month;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
 	}
 
 	public void display() {
